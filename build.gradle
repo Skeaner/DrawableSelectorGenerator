@@ -1,0 +1,30 @@
+plugins {
+    id 'org.jetbrains.intellij' version '1.10.2'
+    id 'java'
+}
+
+group 'me.skean'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(files("libs/xom-1.2.10.jar"))
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = '2020.3.1'
+    pluginName= 'drawable-selector-generator'
+    //plugins 'android'
+    plugins= ['android', 'java','platform-images']
+    updateSinceUntilBuild =false
+    sameSinceUntilBuild =false
+}
+patchPluginXml {
+    changeNotes = """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}

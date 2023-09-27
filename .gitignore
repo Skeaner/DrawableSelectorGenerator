@@ -1,0 +1,7 @@
+/build
+*.iml
+*.apk
+/release
+/debug
+*output-metadata.json
+.idea

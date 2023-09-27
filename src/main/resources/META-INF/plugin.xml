@@ -1,0 +1,30 @@
+<idea-plugin>
+    <id>me.skean.drawable-selector-generator</id>
+    <name>DrawableSelectorGenerator</name>
+    <idea-version since-build="139.1603.1"/>
+    <vendor email="70709695@qq.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+   快速生成drawable.xml
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="drawable-selector-generator"
+                class="SelectorChapekAction"
+                text="Generate Android Selectors"
+                description="Automatically generates drawable selectors from appropriately named resources">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
+                          relative-to-action="ProjectViewPopupMenuRefactoringGroup"/>
+        </action>
+    </actions>
+</idea-plugin>
