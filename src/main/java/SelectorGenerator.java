@@ -7,7 +7,6 @@ import utils.Log;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectorGenerator {
@@ -15,29 +14,34 @@ public class SelectorGenerator {
     private static final String SCHEMA = "http://schemas.android.com/apk/res/android";
     private static final String NS = "android";
 
-    public static void generate(VirtualFile newFile, List<SelectorDetector.Result> detectorResults) {
+    public static void generate(VirtualFile newFile, String prefix, List<String> suffixs) {
         Log.d("generating XML:");
         Element root = new Element("selector");
         root.addNamespaceDeclaration(NS, SCHEMA);
-        List<String> allStatesWithoutNormal = new ArrayList<String>();
-        for (SelectorDetector.Result result : detectorResults) {
-            for (String state : result.states) {
-                if (!state.equals(Constants.NORMAL) && !allStatesWithoutNormal.contains(state)) {
-                    allStatesWithoutNormal.add(state);
-                }
+        boolean containNormal = false;
+        for (String suffix : suffixs) {
+            if (Constants.NORMAL.equals(suffix)) {
+                containNormal = true;
+            } else {
+                String drawableName = prefix + suffix ;
+                String state = Constants.sMapping.get(suffix);
+                Log.d("fileName=" +drawableName + ", states:" + state);
+                Element item = new Element("item");
+                Attribute attribute = new Attribute("drawable", "@drawable/" + drawableName);
+                attribute.setNamespace(NS, SCHEMA);
+                item.addAttribute(attribute);
+                addState(item, state, true);
+                Log.d("row=" + item.toXML());
+                root.appendChild(item);
             }
         }
-        for (SelectorDetector.Result result : detectorResults) {
-            Log.d("fileName=" + result.drawableName + ", states:" + result.states);
+        if (containNormal){
+            String drawableName = prefix + Constants.NORMAL ;
+            Log.d("fileName=" +drawableName );
             Element item = new Element("item");
-            Attribute attribute = new Attribute("drawable", "@drawable/" + result.drawableName);
+            Attribute attribute = new Attribute("drawable", "@drawable/" + drawableName);
             attribute.setNamespace(NS, SCHEMA);
             item.addAttribute(attribute);
-            for (String state : allStatesWithoutNormal) {
-                boolean defaultValue = Constants.sMapping.get(state).defaultValue;
-                addState(item, Constants.sMapping.get(state).attributeName, result.states.contains(state)
-                        ? (!defaultValue) : defaultValue);
-            }
             Log.d("row=" + item.toXML());
             root.appendChild(item);
         }

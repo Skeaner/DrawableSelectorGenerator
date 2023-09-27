@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'me.skean'
-version '1.0-SNAPSHOT'
+version '1.0.1'
 
 repositories {
     mavenCentral()
@@ -25,6 +25,7 @@ intellij {
 }
 patchPluginXml {
     changeNotes = """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+    选中资源文件夹 , 右键 , 点击 Generate Android Selectors<br>
+    或者选中多个图片文件 , 右键 , 点击 Generate Android Selectors
+   """
 }

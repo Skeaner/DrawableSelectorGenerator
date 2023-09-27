@@ -2,7 +2,7 @@
     <id>me.skean.drawable-selector-generator</id>
     <name>DrawableSelectorGenerator</name>
     <idea-version since-build="139.1603.1"/>
-    <vendor email="70709695@qq.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="70709695@qq.com" url="http://www.yourcompany.com">Skean</vendor>
 
     <description><![CDATA[
    快速生成drawable.xml
@@ -20,7 +20,7 @@
     <actions>
         <!-- Add your actions here -->
         <action id="drawable-selector-generator"
-                class="SelectorChapekAction"
+                class="DrawableSelectorAction"
                 text="Generate Android Selectors"
                 description="Automatically generates drawable selectors from appropriately named resources">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
